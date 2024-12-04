@@ -1,0 +1,145 @@
+on join:
+    if {atm::%player%.balance} is not set:
+        set {atm::%player%.balance} to 0
+            
+on right click:
+    if "%region at player%" contains "atm":
+        if player's tool is paper with custom model data 6 named "§f%player%'s Card":
+            if {atm::%player%.balance} is not set:
+                set {atm::%player%.balance} to 0
+            set metadata tag "atm" of player to chest inventory with 4 rows named "Bank ReNiaga"
+            set slot 20 of metadata tag "atm" of player to emerald with custom model data 100 named "&fRp 1.000,-" with lore " " and "&7Klik kiri" and "&8untuk mengambil uang" and "&8Rp 1.000" and " " and "&7Klik kanan" and "&8untuk deposit uang" and "&8Rp 1.000" #with custom model data 9001
+            set slot 22 of metadata tag "atm" of player to gold ingot with custom model data 100 named "&fRp 10.000,-" with lore " " and "&7Klik kiri" and "&8untuk mengambil uang" and "&8Rp 10.000" and " " and "&7Klik kanan" and "&8untuk deposit uang" and "&8Rp 10.000" #with custom model data 9001#with custom model data 9001
+            set slot 24 of metadata tag "atm" of player to diamond with custom model data 100 named "&fRp 100.000,-" with lore " " and "&7Klik kiri" and "&8untuk mengambil uang" and "&8Rp 100.000" and " " and "&7Klik kanan" and "&8untuk deposit uang" and "&8Rp 100.000" #with custom model data 9001#with custom model data 9001
+            set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+            play sound "minecraft:block.note_block.bit" at volume 1 at pitch 1 to player
+            open (metadata tag "atm" of player) to player
+            set {atm::%player%} to true
+
+on inventory click:
+    if {atm::%player%} is true:
+        #### seribu rupiah
+        if event-item is emerald with custom model data 100 named "&fRp 1.000,-":
+            if click type is left mouse button:
+                if {atm::%player%.balance} >= 1000:
+                    remove 1000 from {atm::%player%.balance}
+                    give player 1 emerald with custom model data 100 named "&aRp 1.000"
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                else:
+                    send "&ckamu tidak memiliki cukup saldo untuk di tarik!" to player
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else if click type is right mouse button:
+                if player has 1 emerald with custom model data 100 named "&aRp 1.000":
+                    remove 1 emerald with custom model data 100 named "&aRp 1.000" from player
+                    add 1000 to {atm::%player%.balance}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                else:
+                    send "&ckamu tidak memiliki cukup uang untuk di deposit!"
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+        
+        #### sepuluh ribu rupiah
+        else if event-item is gold ingot with custom model data 100 named "&fRp 10.000,-":
+            if click type is left mouse button:
+                if {atm::%player%.balance} >= 10000:
+                    remove 10000 from {atm::%player%.balance}
+                    give player 1 gold ingot with custom model data 100 named "&aRp 10.000"
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                else:
+                    send "&ckamu tidak memiliki cukup saldo untuk di tarik!" to player
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else if click type is right mouse button:
+                if player has 1 gold ingot with custom model data 100 named "&aRp 10.000":
+                    remove 1 gold ingot with custom model data 100 named "&aRp 10.000" from player
+                    add 10000 to {atm::%player%.balance}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                else if player has 10 emerald with custom model data 100 named "&aRp 1.000":
+                    remove 10 emerald with custom model data 100 named "&aRp 1.000" from player
+                    add 10000 to {atm::%player%.balance}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                
+                else:
+                    send "&ckamu tidak memiliki cukup uang untuk di deposit!"
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+       
+        #### seratus ribu rupiah
+        else if event-item is diamond with custom model data 100 named "&fRp 100.000,-":
+            if click type is left mouse button:
+                if {atm::%player%.balance} >= 100000:
+                    remove 100000 from {atm::%player%.balance}
+                    give player 1 diamond with custom model data 100 named "&aRp 100.000"
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                else:
+                    send "&ckamu tidak memiliki cukup saldo untuk di tarik!" to player
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else if click type is right mouse button:
+                if player has 1 diamond with custom model data 100 named "&aRp 100.000":
+                    remove 1 diamond with custom model data 100 named "&aRp 100.000" from player
+                    add 100000 to {atm::%player%.balance}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                else if player has 10 gold ingot with custom model data 100 named "&aRp 10.000":
+                    remove 10 gold ingot with custom model data 100 named "&aRp 10.000" from player
+                    add 100000 to {atm::%player%.balance}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                else if player has 100 emerald with custom model data 100 named "&aRp 1.000":
+                    remove 100 emerald with custom model data 100 named "&aRp 1.000" from player
+                    add 100000 to {atm::%player%.balance}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    set slot 4 of metadata tag "atm" of player to diamond with custom model data 100 named "&fSaldo" with custom model data 1 with lore " " and "&7Jumlah saldo kamu" and "&7tersisa : &aRp %{atm::%player%.balance}%" 
+                
+                else:
+                    send "&ckamu tidak memiliki cukup uang untuk di deposit!"
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+        
+        cancel event
+
+# on inventory click:
+#     if {atm::%player%} is true:
+#         if event-item is emerald with custom model data 100 named "&fRp 1.000,-":
+#             if click type is left mouse button:
+#                 if player has 1 gold ingot with custom model data 100 named "&aRp 10.000":
+#                     remove 1 gold ingot with custom model data 100 named "&aRp 10.000" from player
+#                     give player 10 emerald with custom model data 100
+#                     play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+#             else if click type is right mouse button:
+#                 if player has 1 diamond with custom model data 100 named "&aRp 100.000":
+#                     remove 1 diamond with custom model data 100 named "&aRp 100.000" from player
+#                     give player 100 emerald with custom model data 100
+#                     play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+
+#         else if event-item is gold ingot with custom model data 100 named "&fRp 10.000,-":
+#             if click type is left mouse button:
+#                 if player has 10 emerald with custom model data 100:
+#                     remove 10 emerald with custom model data 100 from player
+#                     give player 1 gold ingot with custom model data 100 named "&aRp 10.000"
+#                     play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+#             else if click type is right mouse button:
+#                 if player has 1 diamond with custom model data 100 named "&aRp 100.000":
+#                     remove 1 diamond with custom model data 100 named "&aRp 100.000" from player
+#                     give player 10 gold ingot with custom model data 100
+#                     play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+
+#         else if event-item is diamond with custom model data 100 named "&fRp 100.000,-":
+#             if click type is left mouse button:
+#                 if player has 100 emerald with custom model data 100:
+#                     remove 100 emerald with custom model data 100 from player
+#                     give player 1 diamond with custom model data 100 named "&aRp 100.000"
+#                     play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+#             else if click type is right mouse button:
+#                 if player has 10 gold ingot with custom model data 100:
+#                     remove 10 gold ingot with custom model data 100 from player
+#                     give player 1 diamond with custom model data 100 named "&aRp 100.000"
+#                     play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+        
+#         cancel event
+    
+on inventory close:
+    if {atm::%player%} is true:
+        delete {atm::%player%}
