@@ -577,7 +577,7 @@ on right click:
         ###############################
 
         else if player is "NetazuraRasy":
-            set {skin::%player%.1} to "https://imgur.com/O3nOIYV"
+            set {skin::%player%.1} to "https://imgur.com/YPTohWF"
             
             set {skin::%player%.2} to "https://imgur.com/TeB1An4"
             
@@ -884,10 +884,10 @@ on right click:
                     execute console command "skin set %{skin::%player%.5}% %player% classic"
 
         ###############################
-        ####### Monclairs ##########
+        ####### MonclairsYT ##########
         ############################### 
 
-        if player is "Monclairs":
+        if player is "MonclairsYT":
             set {skin::%player%.1} to "https://imgur.com/uhLiYmz"
             set {skin::%player%.2} to "https://imgur.com/uhLiYmz"
             
@@ -902,28 +902,28 @@ on right click:
                 play sound "minecraft:item.armor.equip_leather" at volume 1 at pitch 1 to player
                 if {s.%player%.sekolah} is not set:
                     set {s.%player%.sekolah} to 1
-                    execute console command "skin set %{skin::%player%.1}% %player% classic"
+                    execute console command "skin set %{skin::%player%.1}% %player% slim"
                 else if {s.%player%.sekolah} is 1:
                     delete {s.%player%.sekolah}
-                    execute console command "skin set %{skin::%player%.2}% %player% classic"
+                    execute console command "skin set %{skin::%player%.2}% %player% slim"
 
             ## §fBaju Olahraga
             else if player's tool is paper named "§fBaju Olahraga" with custom model data 2:
                 play sound "minecraft:item.armor.equip_leather" at volume 1 at pitch 1 to player
-                execute console command "skin set %{skin::%player%.3}% %player% classic"
+                execute console command "skin set %{skin::%player%.3}% %player% slim"
 
             ## §fBaju Kasual
             else if player's tool is paper named "§fBaju Kasual" with custom model data 1:
                 play sound "minecraft:item.armor.equip_leather" at volume 1 at pitch 1 to player
                 if {s.%player%.casual} is not set:
                     set {s.%player%.casual} to 1
-                    execute console command "skin set %{skin::%player%.4}% %player% classic"
+                    execute console command "skin set %{skin::%player%.4}% %player% slim"
                 else if {s.%player%.casual} is 1:
                     set {s.%player%.casual} to 2
-                    execute console command "skin set %{skin::%player%.5}% %player% classic"
+                    execute console command "skin set %{skin::%player%.5}% %player% slim"
                 else if {s.%player%.casual} is 2:
                     delete {s.%player%.casual}
-                    execute console command "skin set %{skin::%player%.6}% %player% classic"
+                    execute console command "skin set %{skin::%player%.6}% %player% slim"
     
 
 
@@ -1186,7 +1186,7 @@ on right click:
             set {skin::%player%.1} to "https://imgur.com/pFrLYFh"
             set {skin::%player%.2} to "https://imgur.com/9Cb1spi"
             set {skin::%player%.3} to "https://imgur.com/el02TKw"
-            set {skin::%player%.4} to "https://imgur.com/U6U6id1"
+            set {skin::%player%.4} to "https://imgur.com/MIDvxam"
 
             ## §fBaju Kasual
             if player's tool is paper named "§fBaju Kasual" with custom model data 1:

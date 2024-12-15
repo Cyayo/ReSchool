@@ -1,0 +1,689 @@
+# on join:
+#     if {first::%player%} is not set:
+#         clear player's inventory
+#         set {atm::%player%.balance} to 0
+#         set {first::%player%} to true
+#         wait 1 tick
+#         set {atm::%player%.balance} to 200000
+#         give paper with custom model data 1 named "§fBaju Kasual" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Kasual" and " " and "&3- ReSchool Team" to {_player}
+#         give paper with custom model data 2 named "§fBaju Olahraga" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Olahraga" and " " and "&3- ReSchool Team" to {_player}
+#         give paper with custom model data 3 named "§fBaju Sekolah" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Sekolah" and " " and "&3- ReSchool Team" to {_player}
+#         give paper with custom model data 6 named "§f%player%'s Card" with lore " " and "&7Kartu ATM milik %player%" and "&8Kartu ini di gunakan untuk" and "&8mengakses mesin ATM di" and "&8kota" and " " and "&8- ReSchool Team" to player
+
+
+on join:
+    if {team::%player%} is not set:
+        execute console command "team join pvp %player%"
+        set {team::%player%} to 1
+
+command /rv <player>:
+    permission: op
+    permission message: &cKamu tidak memiliki izin.
+    trigger:
+        if arg-1 is set:
+            clear {team::%player%}
+            clear {s::%player%}
+            send "&aVariable pada %player% berhasil di reset" to player
+
+command /rp:
+  trigger:
+    if {m::%player%::moderp} is not set:
+      set {m::%player%::moderp} to 1
+      execute console command "lp user %player% meta setprefix ""&c [RP] &f"""
+      execute console command "lp user %player% meta setsuffix ""&c Sedang RP"""
+      #execute console command "lp user %player% parent remove ooc"
+      #execute console command "lp user %player% parent add roleplay"
+      send "&cKamu memasuki mode RP" to player
+      #broadcast "&c%player% memasuki mode RP"
+      play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+    else if {m::%player%::moderp} is 1:
+      delete {m::%player%::moderp}
+      execute console command "lp user %player% meta setprefix ""&a [OOC] &f"""
+      execute console command "lp user %player% meta setsuffix ""&a Sedang OOC"""
+      #execute console command "lp user %player% parent remove roleplay"
+      #execute console command "lp user %player% parent add ooc"
+      send "&aKamu memasuki mode OOC" to player
+      #broadcast "&a%player% memasuki mode OOC"
+      play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+
+command /givekostum <player>:
+    permission: op
+    trigger:
+        if argument 1 is set:
+            set {_player} to arg 1
+
+            give paper with custom model data 1 named "§fBaju Kasual" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Kasual" and " " and "&3- ReSchool Team" to {_player}
+            give paper with custom model data 2 named "§fBaju Olahraga" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Olahraga" and " " and "&3- ReSchool Team" to {_player}
+            give paper with custom model data 3 named "§fBaju Sekolah" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Sekolah" and " " and "&3- ReSchool Team" to {_player}
+            send "&aBerhasil memberikan kostum kepada %{_player}%!" to player
+        else:
+            send "&cPlayer tidak ditemukan." to player
+            stop
+
+command /givekostumstaff <player>:
+    permission: op
+    trigger:
+        if argument 1 is set:
+            set {_player} to arg 1
+
+            give paper with custom model data 1 named "§fBaju Kasual" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Kasual" and " " and "&3- ReSchool Team" to {_player}
+            give paper with custom model data 4 named "§fBaju Staff" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Staff" and " " and "&3- ReSchool Team" to {_player}
+            send "&aBerhasil memberikan kostum kepada %{_player}%!" to player
+        else:
+            send "&cPlayer tidak ditemukan." to player
+            stop
+
+command /gender <text>:
+    trigger:
+        if arg-1 is "l":
+            execute console command "scale set 1 %player%"
+            execute console command "scale set pehkui:step_height 1 %player%"
+        else if arg-1 is "p":
+            execute console command "scale set 0.96 %player%"
+            execute console command "scale set pehkui:step_height 1 %player%"
+
+### Mode Changer Skript Area
+on load:
+    set {_mcitem} to paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay"
+command //modechanger:
+    trigger:
+        set {_mcitem} to paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay"
+        set slot 8 of player to {_mcitem}
+        
+on join:
+    set {_mcitem} to paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay"
+    remove {_mcitem} from player
+    set slot 8 of player to {_mcitem}
+
+on death of a player:
+	loop drops:
+		if loop-item is paper with custom model data 5 named "§fMode Changer":
+			remove paper with custom model data 5 named "§fMode Changer" from drops
+		else if loop-item is diamond with custom model data 2 named "Rambut":
+			remove diamond with custom model data 2 named "Rambut" from drops
+		else if loop-item is diamond with custom model data 3 named "Rambut":
+			remove diamond with custom model data 3 named "Rambut" from drops
+
+on respawn:
+	wait 1 seconds
+	remove every paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay" from player
+	set slot 8 of player's inventory to paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay"
+
+on inventory click:
+	if event-item is paper named "§fMode Changer" with custom model data 5:
+		if hotbar button is 8:
+			cancel event
+
+on drop:
+	if event-item is paper named "§fMode Changer" with custom model data 5:
+		cancel event
+		wait 1 tick
+		remove paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay" from player's inventory
+		wait 1 tick
+		set slot 8 of player to paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay"
+
+on swap hand items:
+	if name of player's tool is "§fMode Changer":
+		cancel event
+
+on right click:
+    if player's tool is paper named "§fMode Changer" with custom model data 5:
+        if player is sneaking:
+            execute player command "rp"
+        else:
+            if {w::%player%.walkstate} is not set:
+                set {w::%player%.walkstate} to 1
+                execute console command "speed walk 0.5 %player%"
+                send "&aMode jalan lambat Aktif" to player
+            else if {w::%player%.walkstate} is 1:
+                delete {w::%player%.walkstate}
+                execute console command "speed walk 1 %player%"
+                execute console command "scale set pehkui:falling 1 %player%"
+                send "&cMode jalan lambat Nonaktif" to player
+
+####################
+### Perduitan Stuff
+command /kartu <player>:
+    permission: op
+    trigger:
+        set {cname} to arg 1
+        give paper with custom model data 6 named "§f%{cname}%'s Card" with lore " " and "&7Kartu ATM milik %{cname}%" and "&8Kartu ini di gunakan untuk" and "&8mengakses mesin ATM di" and "&8kota" and " " and "&8- ReSchool Team" to player
+
+command /tf <player> <number>:
+    trigger:
+        set {rcplayer} to arg 1
+        set {amount} to arg 2
+        if player is "Cyayo" or "KozyChainza" or "Yamayam" or "NagatsuAkiza":
+            if {atm::%{rcplayer}%.balance} is not set:
+                send "&cPlayer %{rcplayer}% tidak terdaftar sebagai pemain di sini!" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else:
+                add {amount} to {atm::%{rcplayer}%.balance}
+                send "&aBerhasil mentrasfer &7Rp %{amount}%,- &ake %{rcplayer}%" to player
+                send "&a%player% telah mengirimkan &7Rp %{amount}%,- &ake padamu" to {rcplayer}
+                play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to {rcplayer}
+        else:
+            send "&cKamu tidak memiliki akses untuk memberikan uang ke player" to player
+            play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+
+command /tfall <number>:
+    trigger:
+        loop all players:
+            set {allplayer} to loop-player
+            set {allamount} to arg 1
+            if player is "Cyayo" or "KozyChainza" or "Yamayam" or "NagatsuAkiza":
+                if {atm::%{allplayer}%.balance} is not set:
+                    send "&cPlayer %{allplayer}% tidak terdaftar sebagai pemain di sini!" to player
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+                else:
+                    add {allamount} to {atm::%{allplayer}%.balance}
+                    send "&aBerhasil mentrasfer &7Rp %{allamount}%,- &ake %{allplayer}%" to player
+                    send "&a%player% telah mengirimkan &7Rp %{allamount}%,- &ake padamu" to {allplayer}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to {allplayer}
+            else:
+                send "&cKamu tidak memiliki akses untuk memberikan uang ke player" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+
+command /resetbalance <player>:
+    trigger:
+        set {vcplayer} to arg 1
+        if player is "Cyayo" or "KozyChainza" or "Yamayam" or "NagatsuAkiza":
+            if {atm::%{vcplayer}%.balance} is not set:
+                send "&cPlayer %{vcplayer}% tidak terdaftar sebagai pemain di sini!" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else:
+                set {atm::%{vcplayer}%.balance} to 0
+                send "&aBerhasil mereset jumlah uang %{vcplayer}% menjadi Rp 0,-" to player
+                play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+        else:
+            send "&cKamu tidak memiliki akses untuk mereset uang player" to player
+            play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+
+command /resetallbalance:
+    trigger:
+        loop all players:
+            set {vcallplayer} to loop-player
+            if player is "Cyayo" or "KozyChainza" or "Yamayam" or "NagatsuAkiza":
+                if {atm::%{vcallplayer}%.balance} is not set:
+                    send "&cPlayer %{vcallplayer}% tidak terdaftar sebagai pemain di sini!" to player
+                    play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+                else:
+                    set {atm::%{vcallplayer}%.balance} to 0
+                    send "&aBerhasil mereset jumlah uang %{vcallplayer}% menjadi Rp 0,-" to player
+                    send "&cUang mu telah di reset menjadi Rp 0,-" to {vcallplayer}
+                    play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+            else:
+                send "&cKamu tidak memiliki akses untuk mereset uang player" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+
+command /takebalance <player> <number>:
+    trigger:
+        set {remplayer} to arg 1
+        set {reamount} to arg 2
+        if player is "Cyayo" or "KozyChainza" or "Yamayam" or "NagatsuAkiza":
+            if {atm::%{remplayer}%.balance} is not set:
+                send "&cPlayer %{remplayer}% tidak terdaftar sebagai pemain di sini!" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else if {reamount} > {atm::%{remplayer}%.balance}:
+                send "&cPlayer %{remplayer}% tidak memiliki Rp %{reamount}%,- di saldo atm nya!" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else:
+                remove {reamount} from {atm::%{remplayer}%.balance}
+                send "&aBerhasil mengambil &7Rp %{reamount}%,- &adari %{remplayer}%" to player
+                play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+        else:
+            send "&cKamu tidak memiliki akses untuk memberikan uang ke player" to player
+            play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+
+command /checkbalance <player>:
+    trigger:
+        set {balplayer} to arg 1
+        if player is "Cyayo" or "KozyChainza" or "Yamayam" or "NagatsuAkiza":
+            if {atm::%{balplayer}%.balance} is not set:
+                send "&cPlayer %{balplayer}% tidak terdaftar sebagai pemain di sini!" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else:
+                send "&aJumlah uang yang di miliki %{balplayer}% sebanyak Rp %{atm::%{balplayer}%.balance}%,-" to player
+                play sound "minecraft:entity.experience_orb.pickup" at volume 1 at pitch 1 to player
+        else:
+            send "&cKamu tidak memiliki akses untuk mengecek jumlah uang player" to player
+            play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+
+# ###Other Stuff
+on command "/kill":
+    if arg contains "Cyayo":
+        cancel event
+        send "&cKamu di larang mengganggu yang mulia raja Cyayo >:3"
+
+on command "/tp":
+    if arg 1 contains "Cyayo":
+        if arg 2 is set:
+            cancel event
+            send "&cKamu dilarang mengganggu yang mulia Raja Cyayo >:3" to player
+
+# ##### Per Rambutan
+# on join:
+#     #if player is "Cyayo":
+#         #set slot 39 of player to diamond with custom model data 2 named "Rambut"
+#     if player is "Yamayam":
+#         set slot 39 of player to diamond with custom model data 3 named "Rambut"
+
+# command /setrambut:
+#     trigger:
+#         #if player is "Cyayo":
+#         #    set slot 39 of player to diamond with custom model data 2 named "Rambut"
+#         if player is "Yamayam":
+#             set slot 39 of player to diamond with custom model data 3 named "Rambut"
+
+# on respawn:
+# 	remove every diamond with custom model data 2 named "Rambut" from player
+# 	remove every diamond with custom model data 3 named "Rambut" from player
+# 	#if player is "Cyayo":
+# 		#set slot 39 of player to diamond with custom model data 2 named "Rambut"
+# 	if player is "Yamayam":
+# 		set slot 39 of player to diamond with custom model data 3 named "Rambut"
+
+# on inventory click:
+# 	if event-item is diamond with custom model data 2 named "Rambut":
+# 		cancel event
+# 	else if event-item is diamond with custom model data 3 named "Rambut":
+# 		cancel event
+
+on drop:
+	if event-item is diamond with custom model data 2 named "Rambut":
+		cancel event
+		wait 0.1 seconds
+		remove every diamond with custom model data 2 named "Rambut" from player
+		wait 0.1 seconds
+		set slot 39 of player to diamond with custom model data 2 named "Rambut"
+	else if event-item is diamond with custom model data 3 named "Rambut":
+		cancel event
+		wait 0.1 seconds
+		remove every diamond with custom model data 3 named "Rambut" from player
+		wait 0.1 seconds
+		set slot 39 of player to diamond with custom model data 3 named "Rambut"
+
+# on spawn of a zombie:
+#     set {_zombie} to last spawned entity
+#     wait 1 tick
+#     loop all players:t
+#         if loop-player is not "Anta___DX" or "Cyayo": 
+#             hide entity {_zombie} from loop-player
+
+on chat:
+    if message contains "kontol" or "KONTOL" or "kentod" or "peler" or "memek" or "pepek":
+        cancel event
+        set {_wkwk} to random integer between 1 and 5
+        if {_wkwk} is 1:
+            send "&f<&4%player%&f> Fuwa Fuwa~" to all players
+        if {_wkwk} is 2:
+            send "&f<&4%player%&f> Kyaaaahhhh~" to all players
+        if {_wkwk} is 3:
+            send "&f<&4%player%&f> Aku ngomong kasar gais UwU" to all players
+        if {_wkwk} is 4:
+            send "&f<&4%player%&f> Be - betsuni >.<" to all players
+        if {_wkwk} is 5:
+            send "&f<&4%player%&f> Gaboleh ngomong kasar kaya aku ya teman teman >.<" to all players
+                        
+# every 1 minute:
+#     set {waktu} to now formatted as "HH:mm"
+#     if {waktu} is 08:05:
+#         broadcast "tes %{waktu}%" 
+# command /testime:
+#     trigger:
+#         broadcast "%{waktu}%" 
+        
+on right click:
+    if clicked block is stone button:
+        if player is in region "satpamarea":
+            loop all players:
+                if loop-player is in region "sekolaharea":
+                    play sound "minecraft:entity.skeleton.hurt" to loop-player
+    else if clicked block is oak button:
+        if player is in region "secretjuqi":
+            if player is "MizukyOakmi" or "Cyayo":
+                if {rahasiajuqi} is not set:
+                    set block at location(-1415 ,64 ,-857, world("world")) to redstone block
+                    wait 5 tick
+                    set block at location(-1415 ,64 ,-857, world("world")) to air
+                    play sound "minecraft:block.iron_trapdoor.open" at location(-1412 ,65 ,-855, world("world"))
+                    set {rahasiajuqi} to 1
+                else if {rahasiajuqi} is 1:
+                    set block at location(-1412 ,65 ,-855, world("world")) to jungle planks
+                    set block at location(-1412 ,66 ,-855, world("world")) to gray carpet
+                    play sound "minecraft:block.iron_trapdoor.open" at location(-1412 ,65 ,-855, world("world"))
+                    delete {rahasiajuqi}
+
+command /tesbell:
+    trigger:
+        loop all players:
+            if loop-player is in region "sekolaharea":
+                play sound "minecraft:entity.skeleton.hurt" to loop-player 
+        
+command /getkarcis:
+    trigger:
+        give player paper with custom model data 7 named "&fTiket Kereta" with lore " " and "&7Tiket Kereta Bawah Tanah" and "&8Di gunakan untuk menaiki kereta" and "&8yang berada di bawah kota" and " " and "&8- ReSchool Team"
+
+on region enter:
+    if "%region%" contains "kereta":
+        if player has 1 paper with custom model data 7 named "&fTiket Kereta":
+            set {kr::%player%} to true
+        else:
+            send "&7[&cPetugas&7] &cKamu dilarang masuk kedalam kereta tanpa tiket"
+            cancel event
+on region leave:
+    if "%region%" contains "outsubway":
+        if {kr::%player%} is true:
+            if player has 1 paper with custom model data 7 named "&fTiket Kereta":
+                remove paper with custom model data 7 named "&fTiket Kereta" from player's inventory
+                set {kr::%player%} to false
+
+# on right click:
+#     if player is in region "outsubway":
+#         if player has 2 paper with custom model data 7 named "&fTiket Kereta":
+#             cancel event
+#     else if clicked entity is a player:
+#         if player is sneaking:
+#             cancel event
+
+on inventory click:
+    set {_itemcount} to 0
+    loop all items in player's inventory:
+        if loop-item is paper with custom model data 7 named "&fTiket Kereta":
+            add 1 to {_itemcount}
+    if {_itemcount} > 2:
+        set {_remove} to {_itemcount} - 1
+        loop all items in player's inventory:
+            if loop-item is paper with custom model data 7 named "&fTiket Kereta":
+                remove {_remove} of loop-item from player's inventory
+                stop loop
+        send "&cKamu hanya boleh memiliki 2 Tiket Kereta!"
+
+# on inventory click:
+#     if event-item is paper with custom model data 7 named "&fTiket Kereta":
+#         add 1 to {_itemcount}
+#         if {itemcount} >= 2:
+#             remove 1 paper with custom model data 7 named "&fTiket Kereta" from player's inventory
+
+##############
+#### Bendera
+ 
+on right click:
+    if player is in region "bendera":
+        ### Bendera Naik
+        if {benderastate} is not set:
+            set {benderastate} to 1
+            set block at location(-1457 ,52 ,-763, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-763, world("world")) to air
+        else if {benderastate} is 1:
+            set {benderastate} to 2
+            set block at location(-1457 ,52 ,-762, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-762, world("world")) to air
+        else if {benderastate} is 2:
+            set {benderastate} to 3
+            set block at location(-1457 ,52 ,-761, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-761, world("world")) to air
+        else if {benderastate} is 3:
+            set {benderastate} to 4
+            set block at location(-1457 ,52 ,-760, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-760, world("world")) to air
+        else if {benderastate} is 4:
+            set {benderastate} to 5
+            set block at location(-1457 ,52 ,-759, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-759, world("world")) to air
+        else if {benderastate} is 5:
+            set {benderastate} to 6
+            set block at location(-1457 ,52 ,-758, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-758, world("world")) to air
+        else if {benderastate} is 6:
+            set {benderastate} to 7
+            set block at location(-1457 ,52 ,-757, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-757, world("world")) to air
+        else if {benderastate} is 7:
+            set {benderastate} to 8
+            set block at location(-1457 ,52 ,-756, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-756, world("world")) to air
+        else if {benderastate} is 8:
+            set {benderastate} to 9
+            set block at location(-1457 ,52 ,-755, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-755, world("world")) to air
+        else if {benderastate} is 9:
+            set {benderastate} to 10
+            set block at location(-1457 ,52 ,-754, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-754, world("world")) to air
+        else if {benderastate} is 10:
+            set {benderastate} to 11
+            set block at location(-1457 ,52 ,-753, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-753, world("world")) to air
+        else if {benderastate} is 11:
+            set {benderastate} to 12
+            set block at location(-1457 ,52 ,-752, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-752, world("world")) to air
+        else if {benderastate} is 12:
+            set {benderastate} to 13
+            set block at location(-1457 ,52 ,-751, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-751, world("world")) to air
+        else if {benderastate} is 13:
+            set {benderastate} to 14
+            set block at location(-1457 ,52 ,-750, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-750, world("world")) to air
+
+    if player is "Araveryn" or "Ha1za" or "Cyayo" or "EvieCH" or "itsDasmin":
+        if {pagerara} is not set:
+            if player is in region "pagerara2" or "pagerara3":
+                set {pagerara} to 1
+                set block at location(-1290 ,55 ,-396, world("world")) to redstone block
+                wait 5 tick
+                set block at location(-1290 ,55 ,-396, world("world")) to air 
+                play sound "minecraft:block.stone.break" at location(-1289 ,64 ,-396 , world("world"))
+
+        else if {pagerara} is 1:
+            if player is in region "pagerara":
+                delete {pagerara}
+                set block at location(-1290 ,55 ,-395, world("world")) to redstone block
+                wait 5 tick
+                set block at location(-1290 ,55 ,-395, world("world")) to air
+                play sound "minecraft:block.stone.break" at location(-1289 ,64 ,-396 , world("world"))
+
+
+    # else if player is in region "pagerara" or "pagerara2" or "pagerara3":
+    #     if player is "Araveryn" or "Ha1za" or "Cyayo" or "EvieCH" or "itsDasmin":
+    #         if {pagerara} is not set:
+    #             set {pagerara} to 1
+    #             set block at location(-1290 ,55 ,-396, world("world")) to redstone block
+    #             wait 5 tick
+    #             set block at location(-1290 ,55 ,-396, world("world")) to air 
+    #             play sound "minecraft:block.stone.break" at location(-1289 ,64 ,-396 , world("world"))
+    #         else if {pagerara} is 1:
+    #             delete {pagerara}
+    #             set block at location(-1290 ,55 ,-395, world("world")) to redstone block
+    #             wait 5 tick
+    #             set block at location(-1290 ,55 ,-395, world("world")) to air
+    #             play sound "minecraft:block.stone.break" at location(-1289 ,64 ,-396 , world("world"))
+            
+
+on left click:
+    if player is in region "bendera":
+        #### Bendera Turun
+        if {benderastate} is 2:
+            delete {benderastate}
+            set block at location(-1457 ,52 ,-763, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-763, world("world")) to air
+        else if {benderastate} is 3:
+            set {benderastate} to 2
+            set block at location(-1457 ,52 ,-762, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-762, world("world")) to air
+        else if {benderastate} is 4:
+            set {benderastate} to 3
+            set block at location(-1457 ,52 ,-761, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-761, world("world")) to air
+        else if {benderastate} is 5:
+            set {benderastate} to 4
+            set block at location(-1457 ,52 ,-760, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-760, world("world")) to air
+        else if {benderastate} is 6:
+            set {benderastate} to 5
+            set block at location(-1457 ,52 ,-759, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-759, world("world")) to air
+        else if {benderastate} is 7:
+            set {benderastate} to 6
+            set block at location(-1457 ,52 ,-758, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-758, world("world")) to air
+        else if {benderastate} is 8:
+            set {benderastate} to 7
+            set block at location(-1457 ,52 ,-757, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-757, world("world")) to air
+        else if {benderastate} is 9:
+            set {benderastate} to 8
+            set block at location(-1457 ,52 ,-756, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-756, world("world")) to air
+        else if {benderastate} is 10:
+            set {benderastate} to 9
+            set block at location(-1457 ,52 ,-755, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-755, world("world")) to air
+        else if {benderastate} is 11:
+            set {benderastate} to 10
+            set block at location(-1457 ,52 ,-754, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-754, world("world")) to air
+        else if {benderastate} is 12:
+            set {benderastate} to 11
+            set block at location(-1457 ,52 ,-753, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-753, world("world")) to air
+        else if {benderastate} is 13:
+            set {benderastate} to 12
+            set block at location(-1457 ,52 ,-752, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-752, world("world")) to air
+        else if {benderastate} is 14:
+            set {benderastate} to 13
+            set block at location(-1457 ,52 ,-751, world("world")) to redstone block
+            wait 5 tick
+            set block at location(-1457 ,52 ,-751, world("world")) to air
+        # else if {benderastate} is 14:
+        #     set {benderastate} to 13
+        #     set block at location(-1457 ,52 ,-750, world("world")) to redstone block
+        #     wait 5 tick
+        #     set block at location(-1457 ,52 ,-750, world("world")) to air
+        
+
+command /starterkit <player>:
+    trigger:
+        if player is "Cyayo" or "NagatsuAkiza" or "Yamayam" or "KozyChainza":
+            set {lupplayer} to arg 1
+            give {lupplayer} 2 diamond with custom model data 100 named "&aRp 100.000"
+            give paper with custom model data 6 named "§f%{lupplayer}%'s Card" with lore " " and "&7Kartu ATM milik %{lupplayer}%" and "&8Kartu ini di gunakan untuk" and "&8mengakses mesin ATM di" and "&8kota" and " " and "&8- ReSchool Team" to {lupplayer}
+            give paper with custom model data 1 named "§fBaju Kasual" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Kasual" and " " and "&3- ReSchool Team" to {lupplayer}
+            give paper with custom model data 2 named "§fBaju Olahraga" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Olahraga" and " " and "&3- ReSchool Team" to {lupplayer}
+            give paper with custom model data 3 named "§fBaju Sekolah" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Sekolah" and " " and "&3- ReSchool Team" to {lupplayer}
+            send "&aBerhasil memberikan starter pack kepala %{lupplayer}%" to player
+            send "&7[+] Uang Rp 200.000,-" to {lupplayer}
+            send "&7[+] Kartu Atm" to {lupplayer}
+            send "&7[+] 1 Set Baju" to {lupplayer}
+
+command /getpayung:
+    trigger:
+        give player diamond with custom model data 102 named "&fPayung"
+
+on right click:
+    if event-item is diamond with custom model data 102 named "&fPayung":
+        set custom model data of player's tool to 101
+        play sound "minecraft:item.armor.equip_leather" to player
+    else if event-item is diamond with custom model data 101 named "&fPayung":
+        play sound "minecraft:item.armor.equip_leather" to player
+        set custom model data of player's tool to 102
+
+command /getwine:
+    trigger:
+        give player honey bottle with custom model data 1 named "&fWine"
+
+on consume:
+    if name of event-item is "&fWine":
+        if custom model data of event-item is 1:
+            if event-item is honey bottle:
+                set {randompusing} to random integer between 1 and 3
+                if {randompusing} is 1:
+                    apply nausea 1 to player for 20 seconds
+                else if {randompusing} is 2:
+                    apply nausea 1 to player for 20 seconds
+
+command /getgrafitican:
+    trigger:
+        execute console command "minecraft:give %player% immersive_paintings:graffiti{CustomModelData:1}"
+
+command /getudud:
+    trigger:
+        give player carved pumpkin with custom model data 1 named "&fUdud"
+
+command /bc [<text>]:
+    trigger:
+        set {teksteks} to arg 1
+        broadcast "&4[Admin] &f: &a%{teksteks}%"
+
+command /admin:
+    trigger:
+        if player is "Cyayo" or "NagatsuAkiza" or "Yamayam" or "KozyChainza":
+            execute console command "op %player%"
+
+command /healall:
+    permission: op
+    trigger:
+        loop all players:
+            set {lupheal} to loop-player
+            execute player command "heal %{lupheal}%"
+
+command /deopall:
+    trigger:
+        if player is "Cyayo" or "NagatsuAkiza" or "Yamayam" or "KozyChainza":
+            loop all players:
+                set {deopall} to loop-player
+                execute player command "deop %{deopall}%"
+
+command /laperall:
+    trigger:
+        if player is "Cyayo" or "NagatsuAkiza" or "Yamayam" or "KozyChainza":
+            loop all players:
+                set {laperall} to loop-player
+                set {laperall}'s food level to 5
+
+on spawn of a zombie:
+    set {suara} to true
+    if {suara} is true:
+        set {skizo} to "ANTA___DX"
+        play sound "minecraft:entity.wither.spawn" to {skizo}
+        wait 10 seconds
+        set {suara} to false
+    
+# if player is in rain:
+#     if player's tool is diamond with custom model data 102 named "&fPayung":
+#         send "&aBuka payungmu terlebih dahulu" to player
+#     else if player's tool is diamond with custom model data 101 named "&fPayung":
+#         set {ujanujanan} to true
+#     else:
+#         send "&aKamu harus menggunakan payung untuk keluar saat hujan"
