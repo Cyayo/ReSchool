@@ -1,16 +1,21 @@
-# on join:
-#     if {first::%player%} is not set:
-#         clear player's inventory
-#         set {atm::%player%.balance} to 0
-#         set {first::%player%} to true
-#         wait 1 tick
-#         set {atm::%player%.balance} to 200000
-#         give paper with custom model data 1 named "§fBaju Kasual" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Kasual" and " " and "&3- ReSchool Team" to {_player}
-#         give paper with custom model data 2 named "§fBaju Olahraga" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Olahraga" and " " and "&3- ReSchool Team" to {_player}
-#         give paper with custom model data 3 named "§fBaju Sekolah" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Sekolah" and " " and "&3- ReSchool Team" to {_player}
-#         give paper with custom model data 6 named "§f%player%'s Card" with lore " " and "&7Kartu ATM milik %player%" and "&8Kartu ini di gunakan untuk" and "&8mengakses mesin ATM di" and "&8kota" and " " and "&8- ReSchool Team" to player
-
-
+on join:
+    if {first::%player%5} is not set:
+        execute console command "minecraft:clear %player%"
+        set {atm::%player%.balance} to 0
+        wait 1 tick
+        set {atm::%player%.balance} to 200000
+        give paper with custom model data 1 named "§fBaju Kasual" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Kasual" and " " and "&3- ReSchool Team" to player
+        give paper with custom model data 2 named "§fBaju Olahraga" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Olahraga" and " " and "&3- ReSchool Team" to player
+        give paper with custom model data 3 named "§fBaju Sekolah" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Sekolah" and " " and "&3- ReSchool Team" to player
+        give paper with custom model data 6 named "§f%player%'s Card" with lore " " and "&7Kartu ATM milik %player%" and "&8Kartu ini di gunakan untuk" and "&8mengakses mesin ATM di" and "&8kota" and " " and "&8- ReSchool Team" to player
+        set {first::%player%5} to true
+command /check <player>:
+    trigger:
+        set {firstplayer} to arg 1
+        send "variable %{firstplayer}% is %{first::%player%5}%" to player
+command resettt:
+    trigger:
+        delete {first::%player%5}
 on join:
     if {team::%player%} is not set:
         execute console command "team join pvp %player%"
@@ -264,6 +269,11 @@ on command "/tp":
             send "&cKamu dilarang mengganggu yang mulia Raja Cyayo >:3" to player
 
 # ##### Per Rambutan
+command /getrambutmaya:
+    trigger:
+        execute console command "minecraft:give %player% carved_pumpkin{CustomModelData:4}"
+        execute console command "minecraft:give %player% carved_pumpkin{CustomModelData:3}"
+        execute console command "minecraft:give %player% carved_pumpkin{CustomModelData:2}"
 # on join:
 #     #if player is "Cyayo":
 #         #set slot 39 of player to diamond with custom model data 2 named "Rambut"
