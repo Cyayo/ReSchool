@@ -1,4 +1,4 @@
-Skript for ReSchool Alternate Server
+```Skript for ReSchool Alternate Server
 Minecraft Roleplay Series Indonesia, i made kind of utils, Credit Card and Skin Change system
 
 Here is some command that i made for the server
@@ -31,3 +31,4 @@ Don't forget to follow me!
 Youtube   : https://www.youtube.com/@CyayoCressiel
 X         : https://x.com/CyayoCressiel
 Instagram : https://www.instagram.com/cyayocressiel
+```
