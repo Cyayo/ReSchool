@@ -1,0 +1,417 @@
+#######################
+### Anta Okarun Mode
+on consume:
+    if player is "ANTA___DX":
+        if player's tool is dried kelp:
+            set {turbo1} to "https://imgur.com/fXBpNFs"
+
+            set {turbo2} to "https://imgur.com/f1FbTxH"
+
+            set {turbo3} to "https://imgur.com/23CJkUQ"
+            set {turbo4} to "https://imgur.com/ewNXK6W"
+            set {turbo5} to "https://imgur.com/s1sT2az"
+            set {turbo6} to "https://imgur.com/nGwXmDG"
+
+            if {turbo::%player%} is true:
+                send "&cKamu masih berada dalam mode Turbo" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else if {turbocd} is true:
+                send "&cKamu masih terlalu lelah untuk berubah" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else:
+                if player's food level is 10:
+                #### Sekolah
+                    if {s.%player%.turbo} is 1:
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo1}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{skin199}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    
+                    #### Olahraga
+                    else if {s.%player%.turbo} is 2:
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo2}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta2}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    
+                    #### Kasual
+                    else if {s.%player%.turbo} is 3:
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo3}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta3}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    else if {s.%player%.turbo} is 4:
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo4}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta4}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    else if {s.%player%.turbo} is 5:
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo5}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta5}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    else if {s.%player%.turbo} is 6:
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo6}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta6}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+
+on right click:
+    if player is "ANTA___DX":
+        if player's tool is dried kelp:
+            set {turbo1} to "https://imgur.com/fXBpNFs"
+
+            set {turbo2} to "https://imgur.com/f1FbTxH"
+
+            set {turbo3} to "https://imgur.com/23CJkUQ"
+            set {turbo4} to "https://imgur.com/ewNXK6W"
+            set {turbo5} to "https://imgur.com/s1sT2az"
+            set {turbo6} to "https://imgur.com/nGwXmDG"
+
+            if {turbo::%player%} is true:
+                send "&cKamu masih berada dalam mode Turbo" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else if {turbocd} is true:
+                send "&cKamu masih terlalu lelah untuk berubah" to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+            else:
+                if player's food level is 10:
+                #### Sekolah
+                    if {s.%player%.turbo} is 1:
+                        remove 1 dried kelp from player
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo1}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{skin199}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    
+                    #### Olahraga
+                    else if {s.%player%.turbo} is 2:
+                        remove 1 dried kelp from player
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo2}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta2}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    
+                    #### Kasual
+                    else if {s.%player%.turbo} is 3:
+                        remove 1 dried kelp from player
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo3}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta3}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    else if {s.%player%.turbo} is 4:
+                        remove 1 dried kelp from player
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo4}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta4}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    else if {s.%player%.turbo} is 5:
+                        remove 1 dried kelp from player
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo5}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta5}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player
+                            
+                    else if {s.%player%.turbo} is 6:
+                        remove 1 dried kelp from player
+                        set {turbo::%player%} to true
+                        execute console command "skin set %{turbo6}% %player% slim"
+                        execute console command "scale set pehkui:jump_height 1.6 %player%"
+                        execute console command "scale set pehkui:knockback 5 %player%"
+                        execute console command "scale set pehkui:attack 5 %player%"
+                        execute console command "scale set pehkui:defense 20 %player%"
+                        execute console command "speed walk 5 %player%"
+                        execute console command "scale set pehkui:falling 0 %player%"
+                        apply saturation 1 to player for 29 seconds
+                        wait 1 ticks
+                        execute console command "heal %player%"
+                        play sound "minecraft:entity.wither.hurt" at volume 1 at pitch 1 to player
+                        wait 30 seconds
+                        if {turbo::%player%} is true:
+                            delete {turbo::%player%}
+                            execute console command "skin set %{anta6}% %player% slim"
+                            execute console command "scale set pehkui:jump_height 1 %player%"
+                            execute console command "scale set pehkui:knockback 1 %player%"
+                            execute console command "scale set pehkui:attack 1 %player%"
+                            execute console command "scale set pehkui:defense 1 %player%"
+                            execute console command "speed walk 1 %player%"
+                            execute console command "scale set pehkui:falling 1 %player%"
+                            set player's food level to 8
+                            play sound "minecraft:entity.enderman.death" at volume 1 at pitch 1 to player
+                            #set {turbocd} to true
+                            #wait 10 seconds
+                            #delete {turbocd}
+                            #send "&aCooldown reset!" to player

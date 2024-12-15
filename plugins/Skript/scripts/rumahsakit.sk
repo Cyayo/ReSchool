@@ -1,0 +1,92 @@
+on death: 
+    set {kamar1} to "-1200 66 -317"
+    set {kamar2} to "-1228 66 -320"
+    set {kamar3} to "-1228 66 -329"
+    set {kamar4} to "-1201 66 -326"
+    set {kamar5} to "-1228 66 -338"
+    set {kamar6} to "-1200 66 -335"
+    set {kamar7} to "-1228 66 -347"
+    set {kamar8} to "-1200 66 -345"
+    set {kamar9} to "-1228 66 -356"
+    set {kamar10} to "-1200 66 -353"
+    if {randomkamar} is not set:
+        set {randomkamar} to 1
+        execute console command "spawnpoint %victim% %{kamar1}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 1:
+        set {randomkamar} to 2
+        execute console command "spawnpoint %victim% %{kamar2}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 2:
+        set {randomkamar} to 3
+        execute console command "spawnpoint %victim% %{kamar3}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 3:
+        set {randomkamar} to 4
+        execute console command "spawnpoint %victim% %{kamar4}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 4:
+        set {randomkamar} to 5
+        execute console command "spawnpoint %victim% %{kamar5}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 5:
+        set {randomkamar} to 6
+        execute console command "spawnpoint %victim% %{kamar6}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 6:
+        set {randomkamar} to 7
+        execute console command "spawnpoint %victim% %{kamar7}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 7:
+        set {randomkamar} to 8
+        execute console command "spawnpoint %victim% %{kamar8}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 8:
+        set {randomkamar} to 9
+        execute console command "spawnpoint %victim% %{kamar9}%"
+        set {rs::%victim%} to 3
+    else if {randomkamar} is 9:
+        delete {randomkamar}
+        execute console command "spawnpoint %victim% %{kamar10}%"
+        set {rs::%victim%} to 3
+
+on region leave:
+    if "%region%" contains "rumahsakit":
+        if {rs::%player%} is 3:
+            send "&cKamu harus membayar biaya perawatan untuk keluar dari Rumah Sakit" to player
+            cancel event
+
+command /cekvar:
+    trigger:
+        send "var {rs::%player%} %{rs::%player%}%" to player
+
+on right click:
+    if player is in region "kasirrs":
+        if {rs::%player%} is 3:
+            if player has 100 emerald with custom model data 100 named "&aRp 1.000":
+                remove 100 emerald with custom model data 100 named "&aRp 1.000" from player
+                send "&c- Rp 100.000" to player
+                send "&aBerhasil membayar biaya Rumah Sakit sebesar Rp 100.000" to player
+                delete {rs::%player%}
+                play sound "minecraft:block.note_block.bit" at volume 1 at pitch 1 to player
+            else if player has 10 gold ingot with custom model data 100 named "&aRp 10.000":
+                remove 10 gold ingot with custom model data 100 named "&aRp 10.000" from player
+                send "&c- Rp 100.000" to player
+                send "&aBerhasil membayar biaya Rumah Sakit sebesar Rp 100.000" to player
+                delete {rs::%player%}
+                play sound "minecraft:block.note_block.bit" at volume 1 at pitch 1 to player
+            else if player has 1 diamond with custom model data 100 named "&aRp 100.000":   
+                remove 1 diamond with custom model data 100 named "&aRp 100.000" from player
+                send "&c- Rp 100.000" to player
+                send "&aBerhasil membayar biaya Rumah Sakit sebesar Rp 100.000" to player
+                delete {rs::%player%}
+                play sound "minecraft:block.note_block.bit" at volume 1 at pitch 1 to player
+            else if {atm::%player%.balance} > 99999:
+                remove 100000 from {atm::%player%.balance}
+                send "&c- Rp 100.000" to player
+                send "&aRp 100.000 telah di tarik dari Tabunganmu perihal biaya Rumah Sakit" to player
+                delete {rs::%player%}
+                play sound "minecraft:block.note_block.bit" at volume 1 at pitch 1 to player
+            else:
+                send "&cKamu tidak memiliki cukup uang untuk membayar biaya Rumah Sakit" to player
+                cancel event
