@@ -1,0 +1,55 @@
+# # >>SISTEM KASIR
+
+# on right click:
+#     if player is "NagatsuAkiza" or "epromite":
+#         if player is in region "kasirindoapril1" or "kasirindoapril2":
+#             if metadata tag "kasirindo" of player is not set:
+#                 set metadata tag "kasirindo" of player to chest inventory with 4 rows named "Indo April"
+                
+
+#                 set slot 0 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 1 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 2 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 3 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 5 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 6 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 7 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 8 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 9 of metadata tag "kasirindo" of player to white stained glass pane named " "
+
+#                 # Bottom row
+#                 set slot 17 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 18 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 26 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 27 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 28 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 29 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 30 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 31 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 32 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 33 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 34 of metadata tag "kasirindo" of player to white stained glass pane named " "
+#                 set slot 35 of metadata tag "kasirindo" of player to white stained glass pane named " "
+
+#                 # Set a specific item at the center slot (4th slot)
+#                 set slot 4 of metadata tag "kasirindo" of player to barrier named "§fKeluar"
+
+#             play sound "minecraft:block.note_block.bit" at volume 1 at pitch 1 to player
+#             open (metadata tag "kasirindo" of player) to player
+#             set {indo::%player%} to true
+
+# on inventory click:
+#     if {indo::%player%} is true:
+#         if event-item is barrier named "§fKeluar":
+#             if click type is left mouse button:
+#                 cancel event
+#                 close inventory of player
+#         if event-item is white stained glass pane named " ":
+#             cancel event
+
+# on inventory close:
+#     if {indo::%player%} is true:
+#         delete metadata tag "kasirindo" of player
+
+# # >>SISTEM KASIR
+

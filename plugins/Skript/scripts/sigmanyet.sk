@@ -1,0 +1,148 @@
+# SIGMA NYET
+
+command /voucher <number> <player>:
+    trigger:
+        if arg 1 is set:
+            set {_dur} to argument 1
+        else:
+            send "&cTentukan durasi voucher! Contoh: /voucher 1"
+            stop
+
+        if arg 2 is set:
+            set {_player} to argument 2
+        else:
+            send "&cTentukan nama pemain yang valid! Contoh: /voucher 1 <player>"
+            stop
+
+        if {_dur} = 1:
+            if player has 1 gold ingot with custom model data 100 named "&aRp 10.000":
+                remove 1 gold ingot with custom model data 100 named "&aRp 10.000" from player
+                give paper named "§fVOUCHER 10 MENIT" with lore " " and "&8Gunakan voucher" and "&8selama 10 MENIT" and " " and "&3- ReSchool Team" to {_player}
+                send "&aKamu telah menerima &fVOUCHER 10 MENIT!" to {_player}
+        else if {_dur} = 2:
+            if player has 2 gold ingot with custom model data 100 named "&aRp 10.000":
+                remove 2 gold ingot with custom model data 100 named "&aRp 10.000" from player
+                give paper named "§fVOUCHER 20 MENIT" with lore " " and "&8Gunakan voucher" and "&8selama 20 MENIT" and " " and "&3- ReSchool Team" to {_player}
+                send "&aKamu telah menerima &fVOUCHER 20 MENIT!" to {_player}
+        else if {_dur} = 3:
+            if player has 3 gold ingot with custom model data 100 named "&aRp 10.000":
+                remove 3 gold ingot with custom model data 100 named "&aRp 10.000" from player
+                give paper named "§fVOUCHER 30 MENIT" with lore " " and "&8Gunakan voucher" and "&8selama 30 MENIT" and " " and "&3- ReSchool Team" to {_player}
+                send "&aKamu telah menerima &fVOUCHER 30 MENIT!" to {_player}
+        else:
+            send "&cVoucher tidak tersedia. Pilih durasi 1 atau 2!" to player
+
+# >>SISTEM KASIR
+
+on right click:
+    if player is "IniYomi" or "NagatsuAkiza" or "epromite":
+        if player is in region "banet":
+            if metadata tag "banet" of player is not set:
+                set metadata tag "banet" of player to chest inventory with 4 rows named "Sigma Nyet"
+                set slot 20 of metadata tag "banet" of player to paper named "§fVOUCHER 10 MENIT" with lore " " and "&7Klik kiri" and "&8untuk membeli voucher"
+                set slot 22 of metadata tag "banet" of player to paper named "§fVOUCHER 20 MENIT" with lore " " and "&7Klik kiri" and "&8untuk membeli voucher"
+                set slot 24 of metadata tag "banet" of player to paper named "§fVOUCHER 30 MENIT" with lore " " and "&7Klik kiri" and "&8untuk membeli voucher"
+                set slot 4 of metadata tag "banet" of player to barrier named "§fKeluar"
+            play sound "minecraft:block.note_block.bit" at volume 1 at pitch 1 to player
+            open (metadata tag "banet" of player) to player
+            set {net::%player%} to true
+
+on inventory click:
+    if {net::%player%} is true:
+        if event-item is paper named "§fVOUCHER 10 MENIT":
+            if click type is left mouse button:
+                give paper named "§fVOUCHER 10 MENIT" with lore " " and "&8Gunakan voucher" and "&8selama 10 menit" and " " and "Klik kanan untuk mengaktifkan voucher"  and " " and "&3- ReSchool Team" to player
+                send "&aMengambil &fVOUCHER 10 MENIT!" to player
+            else:
+                send "&cUangmu tidak cukup untuk membeli voucher ini." to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+                cancel event
+                stop
+        if event-item is paper named "§fVOUCHER 20 MENIT":
+            if click type is left mouse button:
+                give paper named "§fVOUCHER 20 MENIT" with lore " " and "&8Gunakan voucher" and "&8selama 20 menit" and " "  and "&3- ReSchool Team" to player
+                send "&aMengambil &fVOUCHER 20 MENIT!" to player
+            else:
+                send "&cUangmu tidak cukup untuk membeli voucher ini." to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+                cancel event
+                stop
+        if event-item is paper named "§fVOUCHER 30 MENIT":
+            if click type is left mouse button:
+                give paper named "§fVOUCHER 30 MENIT" with lore " " and "&8Gunakan voucher" and "&8selama 30 menit" and " "  and "&3- ReSchool Team" to player
+                send "&aMengambil &fVOUCHER 30 MENIT!" to player
+            else:
+                send "&cUangmu tidak cukup untuk membeli voucher ini." to player
+                play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
+                cancel event
+                stop
+        if event-item is barrier named "§fKeluar":
+            if click type is left mouse button:
+                cancel event
+                close inventory of player
+        cancel event
+
+on inventory close:
+  if {net::%player%} is true:
+    delete {net::%player%}
+
+# >>SISTEM KASIR
+
+# >>SISTEM VOUCHER
+
+on right click:
+    if player is in region "sigmanyet" or "sigmanyet1":
+        if player's tool is not air:
+            if player's tool is paper named "§fVOUCHER 10 MENIT":
+                if {voucher.%player%} is not set:
+                    set {voucher.%player%} to true
+                    send "&aVoucher 10 menit kamu telah aktif! Kamu dapat menggunakan fasilitas sekarang." to player
+                    remove 1 paper named "§fVOUCHER 10 MENIT" from player
+                    wait 10 minutes
+                    send "&cVoucher 10 menit kamu telah habis! Kamu tidak dapat menggunakan fasilitas lagi." to player
+                    delete {voucher.%player%}
+                    execute console command "tp %player% ~ ~ ~"
+            else if player's tool is paper named "§fVOUCHER 20 MENIT":
+                if {voucher.%player%} is not set:
+                    set {voucher.%player%} to true
+                    send "&aVoucher 20 menit kamu telah aktif! Kamu dapat menggunakan fasilitas sekarang." to player
+                    remove 1 paper named "§fVOUCHER 20 MENIT" from player
+                    wait 20 minutes
+                    send "&cVoucher 20 menit kamu telah habis! Kamu tidak dapat menggunakan fasilitas lagi." to player
+                    delete {voucher.%player%}
+                    execute console command "tp %player% ~ ~ ~"
+            else if player's tool is paper named "§fVOUCHER 30 MENIT":
+                if {voucher.%player%} is not set:
+                    set {voucher.%player%} to true
+                    send "&aVoucher 30 menit kamu telah aktif! Kamu dapat menggunakan fasilitas sekarang." to player
+                    remove 1 paper named "§fVOUCHER 30 MENIT" from player
+                    wait 30 minutes
+                    send "&cVoucher 30 menit kamu telah habis! Kamu tidak dapat menggunakan fasilitas lagi." to player
+                    delete {voucher.%player%}
+                    execute console command "tp %player% ~ ~ ~"
+                else:
+                    send "&cKamu sudah memiliki voucher aktif! Tunggu hingga selesai sebelum menggunakan yang lain." to player
+                    cancel event
+            else:
+                send "&cItem yang kamu gunakan bukan voucher yang valid." to player
+                cancel event
+
+on right click:
+    if player is in region "sigmanyet" or "sigmanyet1":
+        if {voucher.%player%} is not set:
+            send "&cKamu tidak memiliki voucher aktif! Dilarang menggunakan fasilitas." to player
+            cancel event
+                
+# >>SISTEM VOUCHER
+
+# RESET VAR
+
+command /rvw:
+  permission: op
+  trigger: 
+    loop all players:
+      set {rvwall} to loop-player
+      delete {voucher.%{rvwall}%}
+      delete metadata tag "banet" of player
+      send "done"
+  

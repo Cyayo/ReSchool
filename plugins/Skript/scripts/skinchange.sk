@@ -465,6 +465,7 @@ on right click:
             set {skin::%player%.3} to "https://imgur.com/PGUnX9L"
             set {skin::%player%.4} to "https://imgur.com/KUCkxWw"
             set {skin::%player%.5} to "https://imgur.com/KLAlE4h"
+            set {skin::%player%.6} to "https://imgur.com/3TYRXHX"
             set {skin::%player%.7} to "https://imgur.com/tWKDhCy"
 
             ## §fBaju Sekolah
@@ -490,6 +491,9 @@ on right click:
                     set {s.%player%.casual} to 3
                     execute console command "skin set %{skin::%player%.5}% %player% classic"
                 else if {s.%player%.casual} is 3:
+                    set {s.%player%.casual} to 4
+                    execute console command "skin set %{skin::%player%.6}% %player% classic"
+                else if {s.%player%.casual} is 4:
                     delete {s.%player%.casual}
                     execute console command "skin set %{skin::%player%.7}% %player% classic"
 

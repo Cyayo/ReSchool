@@ -1,22 +1,4 @@
 on join:
-    if {first::%player%5} is not set:
-        execute console command "minecraft:clear %player%"
-        set {atm::%player%.balance} to 0
-        wait 1 tick
-        set {atm::%player%.balance} to 200000
-        give paper with custom model data 1 named "§fBaju Kasual" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Kasual" and " " and "&3- ReSchool Team" to player
-        give paper with custom model data 2 named "§fBaju Olahraga" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Olahraga" and " " and "&3- ReSchool Team" to player
-        give paper with custom model data 3 named "§fBaju Sekolah" with lore " " and "&8Gunakan ini di kamar" and "&8mandi untuk mengganti" and "&8bajumu menjadi Baju Sekolah" and " " and "&3- ReSchool Team" to player
-        give paper with custom model data 6 named "§f%player%'s Card" with lore " " and "&7Kartu ATM milik %player%" and "&8Kartu ini di gunakan untuk" and "&8mengakses mesin ATM di" and "&8kota" and " " and "&8- ReSchool Team" to player
-        set {first::%player%5} to true
-command /check <player>:
-    trigger:
-        set {firstplayer} to arg 1
-        send "variable %{firstplayer}% is %{first::%player%5}%" to player
-command resettt:
-    trigger:
-        delete {first::%player%5}
-on join:
     if {team::%player%} is not set:
         execute console command "team join pvp %player%"
         set {team::%player%} to 1
@@ -87,7 +69,7 @@ command /gender <text>:
             execute console command "scale set 0.96 %player%"
             execute console command "scale set pehkui:step_height 1 %player%"
 
-# ## Mode Changer Skript Area
+### Mode Changer Skript Area
 on load:
     set {_mcitem} to paper with custom model data 5 named "§fMode Changer" with lore " " and "&7Klik kanan" and "&8untuk mengubah walk mode" and " " and "&7Shift-Klik kanan" and "&8untuk mengubah mode roleplay"
 command //modechanger:
@@ -146,8 +128,8 @@ on right click:
                 execute console command "scale set pehkui:falling 1 %player%"
                 send "&cMode jalan lambat Nonaktif" to player
 
-# ###################
-# ## Perduitan Stuff
+####################
+### Perduitan Stuff
 command /kartu <player>:
     permission: op
     trigger:
@@ -256,7 +238,7 @@ command /checkbalance <player>:
             send "&cKamu tidak memiliki akses untuk mengecek jumlah uang player" to player
             play sound "minecraft:block.note_block.bass" at volume 1 at pitch 1 to player
 
-# ###Other Stuff
+##### Other Stuff
 on command "/kill":
     if arg contains "Cyayo":
         cancel event
@@ -268,38 +250,33 @@ on command "/tp":
             cancel event
             send "&cKamu dilarang mengganggu yang mulia Raja Cyayo >:3" to player
 
-# ##### Per Rambutan
-command /getrambutmaya:
+##### Per Rambutan
+on join:
+    #if player is "Cyayo":
+        #set slot 39 of player to diamond with custom model data 2 named "Rambut"
+    if player is "Yamayam":
+        set slot 39 of player to diamond with custom model data 3 named "Rambut"
+
+command /setrambut:
     trigger:
-        execute console command "minecraft:give %player% carved_pumpkin{CustomModelData:4}"
-        execute console command "minecraft:give %player% carved_pumpkin{CustomModelData:3}"
-        execute console command "minecraft:give %player% carved_pumpkin{CustomModelData:2}"
-# on join:
-#     #if player is "Cyayo":
-#         #set slot 39 of player to diamond with custom model data 2 named "Rambut"
-#     if player is "Yamayam":
-#         set slot 39 of player to diamond with custom model data 3 named "Rambut"
+        #if player is "Cyayo":
+        #    set slot 39 of player to diamond with custom model data 2 named "Rambut"
+        if player is "Yamayam":
+            set slot 39 of player to diamond with custom model data 3 named "Rambut"
 
-# command /setrambut:
-#     trigger:
-#         #if player is "Cyayo":
-#         #    set slot 39 of player to diamond with custom model data 2 named "Rambut"
-#         if player is "Yamayam":
-#             set slot 39 of player to diamond with custom model data 3 named "Rambut"
+on respawn:
+	remove every diamond with custom model data 2 named "Rambut" from player
+	remove every diamond with custom model data 3 named "Rambut" from player
+	#if player is "Cyayo":
+		#set slot 39 of player to diamond with custom model data 2 named "Rambut"
+	if player is "Yamayam":
+		set slot 39 of player to diamond with custom model data 3 named "Rambut"
 
-# on respawn:
-# 	remove every diamond with custom model data 2 named "Rambut" from player
-# 	remove every diamond with custom model data 3 named "Rambut" from player
-# 	#if player is "Cyayo":
-# 		#set slot 39 of player to diamond with custom model data 2 named "Rambut"
-# 	if player is "Yamayam":
-# 		set slot 39 of player to diamond with custom model data 3 named "Rambut"
-
-# on inventory click:
-# 	if event-item is diamond with custom model data 2 named "Rambut":
-# 		cancel event
-# 	else if event-item is diamond with custom model data 3 named "Rambut":
-# 		cancel event
+on inventory click:
+	if event-item is diamond with custom model data 2 named "Rambut":
+		cancel event
+	else if event-item is diamond with custom model data 3 named "Rambut":
+		cancel event
 
 on drop:
 	if event-item is diamond with custom model data 2 named "Rambut":
@@ -417,7 +394,10 @@ on inventory click:
 #         if {itemcount} >= 2:
 #             remove 1 paper with custom model data 7 named "&fTiket Kereta" from player's inventory
 
-# ###### Bendera ###### #
+
+
+##############
+#### Bendera
  
 on right click:
     if player is in region "bendera":
@@ -696,22 +676,3 @@ on spawn of a zombie:
 #         set {ujanujanan} to true
 #     else:
 #         send "&aKamu harus menggunakan payung untuk keluar saat hujan"
-
-command /getkartudasar:
-    trigger:
-        give paper with custom model data 6 named "§fKartu Dasar" with lore " " and "&7Kartu ATM kosong yang" and "&8digunakan untuk membuat" and "&8kartu ATM player, gunakan" and "&8di BANK kota" and " " and "&8- ReSchool Team" to player
-
-on right click:
-    if player is in region "urusatm":
-        if player's tool is paper with custom model data 6 named "§fKartu Dasar":
-            remove paper with custom model data 6 named "§fKartu Dasar" from player
-            give paper with custom model data 6 named "§f%player%'s Card" with lore " " and "&7Kartu ATM milik %{lupplayer}%" and "&8Kartu ini di gunakan untuk" and "&8mengakses mesin ATM di" and "&8kota" and " " and "&8- ReSchool Team" to player
-
-
-
-
-
-
-
-
-    

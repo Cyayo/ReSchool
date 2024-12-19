@@ -1,0 +1,54 @@
+# TIME ON RESCHOOL
+command //startrp:
+    permission: op
+    trigger:
+        send "RP dimulai!" to player
+
+        execute console command "time set 0"
+
+        # 20:00 WIB - 20:20 WIB > 06.00 - 07.00
+        loop 20 times: 
+            wait 1 minutes 
+            execute console command "time add 50" 
+        
+        # 20:20 WIB - 20:45 WIB > 
+        loop 25 times: 
+            wait 1 minutes 
+            execute console command "time add 100" 
+        
+        # 20:45 WIB - 21:00 WIB
+        loop 15 times: 
+            wait 1 minutes 
+            execute console command "time add 33" 
+        
+        # 21:00 WIB - 21:25 WIB
+        loop 25 times: 
+            wait 1 minutes 
+            execute console command "time add 80" 
+        
+        # 21:25 WIB - 21:50 WIB
+        loop 25 times: 
+            wait 1 minutes 
+            execute console command "time add 150" 
+        
+        # 21:50 WIB - 22:00 WIB:
+        loop 10 times: 
+            wait 1 minutes 
+            execute console command "time add 500" 
+        
+        # 22:00 WIB - 22:10 WIB
+        loop 10 times: 
+            wait 1 minutes 
+            execute console command "time add 400" 
+        
+        send "RP selesai!" to player
+
+
+# command //stoprp:
+#     permission: op
+#     trigger:
+#         if {rprun} is true:
+#             set {rprun} to false
+#             send "RP dihentikan!" to player
+#         else:
+#             send "Tidak ada RP yang sedang berjalan." to player
