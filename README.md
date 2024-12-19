@@ -28,8 +28,14 @@ Here is some command that i made for the server
 --------------------------------------------------------------------------------------------------------
 
 Feel free to use as a reference
-Don't forget to follow me!
+Don't forget to follow us!
+Cyayo
 Youtube   : https://www.youtube.com/@CyayoCressiel
 X         : https://x.com/CyayoCressiel
 Instagram : https://www.instagram.com/cyayocressiel
+
+Akiza
+Youtube   : https://www.youtube.com/@NagatsuAkiza
+X         : https://x.com/NagatsuAkiza
+Instagram : https://www.instagram.com/nagatsuakiza
 ```
